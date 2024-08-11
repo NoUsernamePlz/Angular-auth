@@ -1,27 +1,78 @@
-# UserAuth
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.3.
+# AngularAuth
 
-## Development server
+This is an angular application for user authentication.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Demo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Click here for live demo=> [click me :)](https://angular-auth-six.vercel.app/auth)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Features
 
-## Running unit tests
+- it has 3 routes (auth, login, signup)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Documentation
 
-## Further help
+Tech stack used are:
+- AngularJs
+- Tailwind Css
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/NoUsernamePlz/Angular-auth.git
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm start
+
+```
+
+# Run Test Cases
+
+## dummy-data
+ 
+ ### users = [
+   - { email: 'user1@example.com', mobile: '1234567890', password: 'password123' },
+   - { email: 'user2@example.com', mobile: '0987654321', password: 'password456' },
+   - { email: 'user3@example.com', mobile: '1122334455', password: 'password789' },
+   - { email: '', mobile: '6677889900', password: 'password321' }
+  ];
+
+### organizations = [
+   - { id: 'org1', name: 'Organization One' },
+   - { id: 'org2', name: 'Organization Two' },
+   - { id: 'org3', name: 'Organization Three' }
+  ];
+
+
+
+  # Steps
+
+  - Step-1: Enter the user email or mobile (use email or mobile number from the data above to go to login page.) 
+  - step-2: If login page then:Enter the value from the data above(for ex: email:user1@example.com , password:password123)
+  - step-3: If sign up page opens then fill the data accordingly for step 1 form and then for step 2 form use organization data for Organization name and organisation id (for ex: organization-name:Organization One, organization-id:org1)
+
+
+
