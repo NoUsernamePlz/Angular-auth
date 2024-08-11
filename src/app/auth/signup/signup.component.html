@@ -1,0 +1,167 @@
+<div class="bg-gradient-to-br from-[#0054B3] to-[#F1F6F8] h-screen w-full flex items-center justify-center">
+    <div class="max-w-6xl w-full mx-auto min-h-[650px] h-auto flex items-center">
+        <div class="bg-[#DBE9F6] w-[50%] rounded-l-2xl min-h-[650px] h-full">
+            <img src="/images/logo.png" width="117px" height="42px" alt="logo" class="m-5" />
+            <img src="/images/homeImg.png" width="full" height="full" />
+        </div>
+
+        <div class="w-[50%] bg-white rounded-r-2xl flex items-center min-h-[650px] h-auto"
+            *ngIf="!signupSuccess; else success">
+            <div *ngIf="step === 1" class="w-full">
+                <div class="h-3 py-10 gap-4 max-w-[450px] w-full pl-20 rounded-r-2xl flex items-center">
+                    <hr class="w-[50%] bg-[#0069D1] py-1 rounded-xl h-[2px]" />
+                    <hr class="w-[50%] bg-[#CFD0D4] py-1 rounded-xl h-[2px]" />
+                </div>
+                <form [formGroup]="step1Form" (ngSubmit)="onStep1Submit()"
+                    class="max-w-[450px] w-full pl-20 max-h-[350px] h-full flex flex-col gap-5">
+                    <div class="flex flex-col">
+                        <label for="emailOrMobile" class="pb-1 text-sm text-[#0069D1] font-semibold">Enter Email
+                            ID/Mobile</label>
+                        <input id="emailOrMobile" formControlName="emailOrMobile" type="text"
+                            class="bg-[#E4ECEE] py-3 rounded-3xl cursor-not-allowed placeholder:font-semibold px-4"
+                            placeholder="Enter full email or mobile" />
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="name" class="pb-1 text-sm text-[#0069D1] font-semibold">Enter Full Name</label>
+                        <input id="name" formControlName="name" type="text"
+                            class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4"
+                            placeholder="Enter full name" />
+                        <div *ngIf="Name?.errors?.required && Name?.touched"
+                            class="text-[#DB3F27] pt-1 font-semibold text-sm">
+                            Name is required.
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="password" class="pb-1 text-sm text-[#0069D1] font-semibold">Create Password</label>
+                        <input id="password" formControlName="password" type="password"
+                            class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4"
+                            placeholder="Create password" />
+                        <div *ngIf="Password?.errors?.required && Password?.touched"
+                            class="text-[#DB3F27] pt-1 font-semibold text-sm">
+                            Password is required.
+                        </div>
+                        <div *ngIf="Password?.errors?.minlength && Password?.touched"
+                            class="text-[#DB3F27] pt-1 font-semibold text-sm">
+                            Password should be minimum 6 digit long.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="bg-[#0069D1] rounded-3xl py-3 text-white font-semibold text-sm w-full">
+                        Continue
+                    </button>
+                </form>
+            </div>
+            <!-- step 2 form starts here -->
+            <div *ngIf="step === 2" class="w-full h-auto overflow-hidden">
+                <h1 class="text-[#0069D1] text-xl max-w-[450px] w-full pl-20 cursor-pointer" (click)="onBack()">
+                    Go Back
+                </h1>
+                <div class="h-3 py-8 gap-4 max-w-[450px] w-full pl-20 rounded-r-2xl flex items-center">
+                    <hr class="w-[50%] bg-[#0069D1] py-1 rounded-xl h-[2px]" />
+                    <hr class="w-[50%] bg-[#0069D1] py-1 rounded-xl h-[2px]" />
+                </div>
+                <form [formGroup]="step2Form" (ngSubmit)="onStep2Submit()"
+                    class="max-w-[450px] w-full pl-20 min-h-[350px] max-h-[500px] h-full flex flex-col gap-4 overflow-y-auto scrollbar-hide">
+                    <div class="flex flex-col">
+                        <label for="organizationName" class="pb-1 text-sm text-[#0069D1] font-semibold">Organization
+                            Name</label>
+                        <input id="organizationName" formControlName="organizationName" type="text"
+                            class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4"
+                            placeholder="Enter organization name" />
+                        <span *ngIf="orgError && !OrganizationName?.errors?.required" class="text-[#DB3F27]">{{ orgError
+                            }}</span>
+                        <span *ngIf="
+                OrganizationName?.errors?.required && OrganizationName?.touched
+              " class="text-[#DB3F27]">Organization Name Is Required</span>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="organizationId" class="pb-1 text-sm text-[#0069D1] font-semibold">Organization
+                            ID</label>
+                        <input id="organizationId" formControlName="organizationId" type="text"
+                            class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4"
+                            placeholder="Enter organization ID" />
+                        <span *ngIf="orgError && !OrganizationId?.errors?.required" class="text-[#DB3F27]">{{ orgError
+                            }}</span>
+                        <span *ngIf="
+                OrganizationId?.errors?.required && OrganizationId?.touched
+              " class="text-[#DB3F27]">Organization Id Is Required</span>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="designation" class="pb-1 text-sm text-[#0069D1] font-semibold">Designation</label>
+                        <div class="relative">
+                            <select id="designation" formControlName="designation"
+                                class="appearance-none bg-[#E4ECEE] w-full py-3 px-4 pr-8 rounded-3xl border border-gray-300">
+                                <option value="" disabled selected class="text-gray-500">
+                                    Select a designation
+                                </option>
+                                <option *ngFor="let desig of designations" [ngValue]="desig"
+                                    class="py-2 px-4 hover:bg-blue-100 rounded-md">
+                                    {{ desig }}
+                                </option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <span *ngIf="Designation.errors?.required && Designation.touched"
+                            class="text-[#DB3F27]">Designation Is Required</span>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="birthDate" class="pb-1 text-sm text-[#0069D1] font-semibold">Birth Date</label>
+                        <input id="birthDate" formControlName="birthDate" type="date"
+                            class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4" />
+                        <span *ngIf="BirthDate.errors?.required && BirthDate.touched" class="text-[#DB3F27]">BirthDate
+                            Is Required</span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <div class="flex flex-col w-[45%]">
+                            <label for="city" class="pb-1 text-sm text-[#0069D1] font-semibold">City</label>
+                            <input id="city" formControlName="city" type="text" placeholder="city"
+                                class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4" />
+                            <span *ngIf="City.errors?.required && City.touched" class="text-[#DB3F27]">City Is
+                                Required</span>
+                        </div>
+
+                        <div class="flex flex-col w-[45%]">
+                            <label for="pincode" class="pb-1 text-sm text-[#0069D1] font-semibold">Pincode</label>
+                            <input id="pincode" formControlName="pincode" type="text" placeholder="pincode"
+                                class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4" />
+                            <span *ngIf="Pincode.errors?.required && Pincode.touched" class="text-[#DB3F27]">Pincode Is
+                                Required</span>
+                            <span *ngIf="Pincode.errors?.pattern && Pincode.touched" class="text-[#DB3F27]">Invalid
+                                Pincode</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="bg-[#0069D1] rounded-3xl py-3 text-white font-semibold text-sm w-full">
+                        Next
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- success component rendering here -->
+        <ng-template #success>
+            <div class="flex-col justify-center w-[50%] bg-white rounded-r-2xl flex items-center min-h-[650px] h-auto">
+                <img src="/images/success.png" width="full" height="full" class="p-4" />
+                <h1 class="font-bold text-3xl text-[#282C3F] px-2">
+                    Welcome to Solvei8!
+                </h1>
+                <h3 class="text-xl text-[#737E8A] px-5">
+                    Redirecting you to the Login screen. This might take a few seconds...
+                </h3>
+            </div>
+        </ng-template>
+    </div>
+</div>

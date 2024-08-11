@@ -1,0 +1,52 @@
+<div class="bg-gradient-to-br from-[#0054B3] to-[#F1F6F8] h-screen w-full flex items-center justify-center">
+    <div class="max-w-6xl w-full mx-auto h-[600px] flex items-center">
+      <div class="bg-[#DBE9F6] h-full w-[50%] rounded-l-2xl">
+        <img src="/images/logo.png" width="117px" height="42px" alt="logo" class="m-5"/>
+        <img src="/images/homeImg.png" width="full" height="full"/>
+  
+      </div>
+  
+      <div class="w-[50%] h-full bg-white rounded-r-2xl flex items-center">
+        <form [formGroup]='loginForm' class="max-w-[450px] w-full pl-20 max-h-[350px] h-full flex flex-col gap-5" *ngIf="!loginSuccess; else success">
+            <h1 class="text-[#2D2D36] font-semibold text-xl">Welcome Back, John!</h1>
+            
+            <div class="flex flex-col" *ngIf="Email.value; else mobileInput">
+              <label class="pb-1 text-sm text-[#0069D1] font-semibold" for="email">Enter Email ID</label>
+              <input class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4 cursor-not-allowed" id="email" placeholder="Enter full email" formControlName='email'/>
+              <!-- <div *ngIf="Email.errors?.required && Email.touched" class="text-[#DB3F27] pt-1 font-semibold text-sm">Email is required.</div>
+              <div *ngIf="Email.errors?.email && Email.touched" class="text-[#DB3F27] pt-1 font-semibold text-sm">Please enter a valid email.</div> -->
+            </div>
+            
+            <ng-template #mobileInput>
+              <div class="flex flex-col">
+                <label class="pb-1 text-sm text-[#0069D1] font-semibold" for="mobile">Enter Mobile No.</label>
+                <input class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4 cursor-not-allowed" id="mobile" [disabled]="Mobile.value" placeholder="91+" formControlName='mobile'/>
+                <!-- <div *ngIf="Mobile.errors?.required && Mobile.touched" class="text-[#DB3F27] pt-1 font-semibold text-sm">Mobile number is required.</div>
+                <div *ngIf="Mobile.errors?.pattern && Mobile.touched" class="text-[#DB3F27] pt-1 font-semibold text-sm">Please enter a valid mobile number.</div> -->
+              </div>
+            </ng-template>
+          
+            <div class="flex flex-col">
+              <label class="pb-1 text-sm text-[#0069D1] font-semibold" for="password">Enter Password</label>
+              <input class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4" id="password" type="password" placeholder="Password" formControlName='password'/>
+              <div *ngIf="Password.errors?.required && Password.touched" class="text-[#DB3F27] pt-1 font-semibold text-sm">Password is required.</div>
+              <div *ngIf="Password.errors?.minlength && Password.touched" class="text-[#DB3F27] pt-1 font-semibold text-sm">Password must be at least 6 characters long.</div>
+              <span *ngIf="invalidCredentials && !Password.errors?.required" class="text-[#DB3F27]">{{ invalidCredentials }}</span>
+            </div>
+          
+            <button class="bg-[#0069D1] rounded-3xl py-3 text-white font-semibold text-sm" type="submit" (click)="onLogin()">Next</button>
+          </form>
+
+          <ng-template #success>
+            <div class="flex flex-col items-center justify-center w-full">
+                <img src="/images/success.png" width="full" height="full" class="p-4"/>
+                <h1 class="font-bold text-3xl text-[#282C3F]">Lets connect today!</h1>
+                <h3 class="text-xl text-[#737E8A]">Kindly wait as we are curating the data accordingly.</h3>
+            </div>
+          </ng-template>
+          </div>
+        
+      </div>
+  
+      
+    </div>

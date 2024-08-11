@@ -1,0 +1,84 @@
+<div
+  class="bg-gradient-to-br from-[#0054B3] to-[#F1F6F8] h-screen w-full flex items-center justify-center"
+>
+  <div class="max-w-6xl w-full mx-auto h-[600px] flex items-center">
+    <div class="bg-[#DBE9F6] h-full w-[50%] rounded-l-2xl">
+      <img
+        src="/images/logo.png"
+        width="117px"
+        height="42px"
+        alt="logo"
+        class="m-5"
+      />
+      <img src="/images/homeImg.png" width="full" height="full" />
+    </div>
+
+    <div class="w-[50%] h-full bg-white rounded-r-2xl flex items-center">
+      <form
+        [formGroup]="form"
+        class="max-w-[450px] w-full pl-20 max-h-[350px] h-full flex flex-col gap-5"
+        (ngSubmit)="onSubmit()"
+      >
+        <h1 class="text-[#2D2D36] font-semibold text-xl">Welcome</h1>
+        <div class="flex flex-col">
+          <label class="pb-1 text-sm text-[#0069D1] font-semibold" for="email"
+            >Enter Email ID</label
+          >
+          <input
+            class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4"
+            id="email"
+            placeholder="Enter full email"
+            formControlName="email"
+          />
+          <div
+            *ngIf="Email.errors?.required && Email.touched && !Mobile.value"
+            class="text-[#DB3F27] pt-1 font-semibold text-sm"
+          >
+            Email is required
+          </div>
+          <div
+            *ngIf="Email.errors?.email && Email.touched && !Mobile.value"
+            class="text-[#DB3F27] pt-1 font-semibold text-sm"
+          >
+            Invalid Email
+          </div>
+        </div>
+
+        <span class="font-semibold text-sm text-[#767676] p-1">( or )</span>
+
+        <div class="flex flex-col">
+          <label class="pb-1 text-sm text-[#0069D1] font-semibold" for="mobile"
+            >Enter Mobile No.</label
+          >
+          <input
+            class="bg-[#E4ECEE] py-3 rounded-3xl placeholder:font-semibold px-4"
+            id="mobile"
+            placeholder="91+"
+            formControlName="mobile"
+          />
+
+          <div
+            *ngIf="Mobile.errors?.required && Mobile.touched && !Email.value"
+            class="text-[#DB3F27] pt-1 font-semibold text-sm"
+          >
+            Mobile No. is required
+          </div>
+          <div
+            *ngIf="Mobile.errors?.pattern && Mobile.touched && !Email.value"
+            class="text-[#DB3F27] pt-1 font-semibold text-sm"
+          >
+            Invalid Mobile Number
+          </div>
+        </div>
+
+        <button
+          class="bg-[#0069D1] rounded-3xl py-3 text-white font-semibold text-sm"
+          type="submit"
+          [disabled]="Mobile.errors?.pattern || Email.errors?.email"
+        >
+          Next
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
